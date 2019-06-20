@@ -63,6 +63,21 @@ void insertion_after(DLL **head,int x,int node_number){
 	}
 }
 
+void reverse(DLL **head){
+	DLL *temp = NULL;
+	DLL *trav = (*head);
+
+	while(trav != NULL){
+		temp = trav->prev;
+		trav->prev = trav->next;
+		trav->next = temp;
+		trav = trav->prev;
+	}
+
+	if(temp != NULL)
+		*head = temp->prev;
+}
+
 void deletion_front(DLL **head){
 	DLL *temp = NULL;
 	temp = (*head)->next;
@@ -118,6 +133,9 @@ int main(){
 	print(head);
 	insertion_after(&head,2,2);
 	cout << "INSERTION AFTER NODE 2" <<endl;
+	print(head);
+	reverse(&head);
+	cout << "REVERSE OF THE DOUBLY LINKED LIST" <<endl;
 	print(head);
 	deletion_after(&head,2);
 	cout << "DELETION OF 2" << endl;

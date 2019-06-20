@@ -62,6 +62,38 @@ void insertion_after(DLL **head,int x,int node_number){
 		}
 	}
 }
+
+void deletion_front(DLL **head){
+	DLL *temp = NULL;
+	temp = (*head)->next;
+	temp->prev = NULL;
+	(*head) = temp;
+	return;
+
+}
+
+void deletion_end(DLL **head){
+	DLL *trav = (*head);
+	while(trav->next != NULL){
+		trav = trav->next;
+	}
+	trav->prev->next = NULL;
+	return;
+}
+
+void deletion_after(DLL **head,int x){
+	DLL *trav = (*head);
+	while(trav->next != NULL){
+		if(trav->data == x){
+			trav->prev->next = trav->next;
+			trav->next->prev = trav->prev;
+			return;
+		}
+		else{
+			trav = trav->next;
+		}
+	}
+}
 print(DLL *head){
 
 	while(head != NULL){
@@ -87,16 +119,14 @@ int main(){
 	insertion_after(&head,2,2);
 	cout << "INSERTION AFTER NODE 2" <<endl;
 	print(head);
-
-}
-
-
-
-int main(){
-	DLL *head = NULL;
-
-	insertion_end(&head,7);
-	insertion_end(&head,8);
+	deletion_after(&head,2);
+	cout << "DELETION OF 2" << endl;
+	print(head);
+	deletion_front(&head);
+	cout << "DELETION AT THE FRONT" << endl;
+	print(head);
+	deletion_end(&head);
+	cout << "DELETION AT THE END" << endl;
 	print(head);
 
 }
